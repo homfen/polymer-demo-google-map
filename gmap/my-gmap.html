@@ -1,0 +1,33 @@
+<link rel="import" href="../components/paper-input/paper-input.html"/>
+<link rel="import" href="../components/paper-button/paper-button.html"/>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+<polymer-element name="my-gmap" attributes="width,height">
+  <template>
+    <style>
+      #map{
+        border:1px solid black;
+      }
+    </style>
+    <paper-input id="longtitude" label="Enter longtitude"></paper-input>
+    <paper-input id="latitude" label="Enter latitude"></paper-input>
+    <paper-button id="getmap" on-tap="{{showMap}}" raisedbutton="" class="colored" label="go" role="button" tabindex="0" aria-label="go"></paper-button>
+    <div id="map" style='width:{{width}}px;height:{{height}}px;'></div>
+  </template>
+  <script>
+  Polymer({
+    width: 500, 
+    height:500,
+    showMap: function() {
+      var lon = this.$.longtitude.value;
+      var lat = this.$.latitude.value;
+      var map = this.$.map;
+      var mapOptions = {
+        zoom: 8,
+        center: new google.maps.LatLng(lat, lon)
+      };
+      new google.maps.Map(map,mapOptions);
+    }
+  });
+  </script>
+</polymer-element>
